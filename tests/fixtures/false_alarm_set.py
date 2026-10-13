@@ -1,0 +1,103 @@
+"""Everyday emails that are NOT requests for a quote (NEG), and requests in many styles (POS). Written by hand.
+Used to measure false alarms of the enquiry catch: score them with the engine and count what is caught.
+They are examples of mail types, not real customer data."""
+# (category, subject, sender, body)  -- everyday mail that is NOT a request for a quote. Written to resemble a business inbox.
+NEG = [
+# invoices received / payment reminders / receipts
+("invoice","Invoice INV-30417 from Delta Components","accounts@deltacomp.example","Dear customer,\n\nPlease find attached invoice INV-30417 for $3,180.00, covering the goods delivered on 2 October. Payment terms are net 30.\n\nKind regards,\nAccounts Receivable"),
+("invoice","Your October invoice","billing@cloudtools.example","Hi Sam,\n\nYour invoice for October is ready. Total due: $249.00. You can download it from your account or pay by card."),
+("invoice","Invoice 88213","finance@northwind.example","Hello, attached is invoice 88213 for consulting services in September. Please remit within 14 days. Bank details are in the PDF."),
+("invoice","Tax invoice - order 55120","orders@gearhub.example","Thank you for your order. Your tax invoice is attached. Total CAD 1,204.50 including HST."),
+("payment_reminder","Reminder: invoice 7781 is overdue","ar@supplyline.example","This is a friendly reminder that invoice 7781 for $812.00 was due on 30 September. Please arrange payment or let us know if there is an issue."),
+("payment_reminder","Final notice - payment required","collections@officefirst.example","Our records show an unpaid balance of $1,950. Please pay by Friday to avoid late fees."),
+("receipt","Receipt for your payment","receipts@stripe-mail.example","Thanks for your payment of $59.00 to Acme Cloud. Your receipt is attached. No further action is needed."),
+("receipt","Payment received - thank you","accounts@fastparts.example","We have received your payment of $3,180.00 against invoice INV-30417. Thank you for your business."),
+("receipt","Your order receipt #A-99012","no-reply@shop.example","Order receipt. Items: 2 x door sensor kit. Total $188.40. Paid with Visa ending 4242."),
+# shipping / orders
+("shipping","Your order has shipped","shipping@gearhub.example","Good news, order 55120 has shipped via UPS. Tracking number 1Z999AA10123456784. Estimated delivery Friday."),
+("shipping","Delivery scheduled for tomorrow","dispatch@fastfreight.example","Your shipment is scheduled for delivery tomorrow between 9am and 1pm. Please ensure someone is available to sign."),
+("shipping","Package delivered","noreply@courier.example","Your package was delivered to the front desk at 2:14 pm and signed for by R. Singh."),
+("order_confirm","Order confirmation 7B-4410","orders@deltacomp.example","Thank you for your order. We have received purchase order 7B-4410 for 12 x door operator. Expected dispatch: 14 October."),
+("order_confirm","We've received your order","sales@motorparts.example","Your order has been confirmed. We will email you when it ships. Order total $2,310.00."),
+("purchase_order","Purchase Order PO-5521","procurement@buildright.example","Hi, please find attached purchase order PO-5521 for 20 units of the 3D door detector as quoted. Please confirm delivery date."),
+("purchase_order","PO 99-1204 attached","buyer@elevatorpros.example","Attached is our PO 99-1204 against your quotation Q-2026-88. Ship to the Mississauga warehouse."),
+("purchase_order","New order from Condo Corp 778","orders@condocorp.example","Please process the attached purchase order and send an order acknowledgement."),
+# quotes SENT TO us (vendor), and replies about a quote
+("vendor_quote","Quotation Q-4471 for your request","sales@deltacomp.example","Dear Sam,\n\nThank you for your enquiry. Please find attached our quotation Q-4471 for 40 door operators at $212 each, valid for 30 days. Delivery 3 weeks from order."),
+("vendor_quote","Price list October 2026 attached","info@sensorwerks.example","Hello, please find our updated price list effective 1 October. Let us know if you would like a formal quotation for any items."),
+("vendor_quote","Our proposal for your project","proposals@integra-it.example","Hi Sam, as discussed on our call, here is our proposal for the document capture project, including pricing and timeline. Happy to walk you through it."),
+("vendor_quote","Re: Freight quote Toronto to Montreal","rates@fastfreight.example","Thanks for waiting. The rate for 4 pallets is $640, pick-up Tuesday, delivery Thursday. Please confirm and we will book."),
+("quote_reply","Re: Quote Q-2026-88","buyer@elevatorpros.example","Thanks for the quote. We are going ahead with option B. Please send the order acknowledgement."),
+("quote_reply","Re: Your quotation","purchasing@condocorp.example","The price is above our budget. Can you come down by 10 percent? Otherwise we will have to pass."),
+("quote_reply","Quote accepted","info@brightbuild.example","We accept quotation Q-2026-91 as sent. PO to follow tomorrow."),
+# subscriptions / newsletters / events
+("renewal","Your subscription renews on 1 November","billing@cloudtools.example","Your plan renews on 1 November for $29. Manage your subscription any time in account settings."),
+("renewal","Domain examplecorp.example expires soon","renewals@domainhost.example","Your domain expires in 30 days. Renew now to avoid interruption of your website and email."),
+("renewal","Your licence expires in 14 days","licensing@softvendor.example","Your annual licence for DesignSuite expires on 20 October. Renew today to keep your updates."),
+("newsletter","This week in logistics","news@logisticsweekly.example","Top stories: port congestion eases, fuel surcharge changes, and five tips for warehouse safety. Read more online. Unsubscribe any time."),
+("newsletter","Product update: three new features","hello@cloudtools.example","We shipped dark mode, faster search and a new export. Read the full release notes on our blog."),
+("newsletter","Elevator industry news roundup","editor@liftmag.example","This month: new code changes for modernization projects, a profile of a Toronto contractor, and upcoming trade shows."),
+("newsletter","Your weekly digest","digest@medium-example.example","Stories picked for you: how teams use automation, the case for simple tools, and more."),
+("event","Join our webinar on document automation","events@integra-it.example","Free webinar next Tuesday at 11am ET. Learn how teams cut processing time in half. Reserve your seat."),
+("event","You are invited: Elevator Expo 2026","info@elevatorexpo.example","Visit us at booth 214. Register now for free entry and see live product demonstrations."),
+("event","Save the date: customer conference","marketing@softvendor.example","Our annual conference is on 12 November in Chicago. Early-bird registration is open."),
+# cold outreach / pitches
+("cold_outreach","Quick idea for ExampleCorp","jordan@growthbridge.example","Hi Sam, I help SaaS companies book more demos with outbound email. Worth a 15 minute call this week?"),
+("cold_outreach","Verified purchase proof","tara@reviewco.example","Hi Sam, ExampleCorp builds blockchain-backed workflow automation, so you clearly think hard about trust. I'm Tara at ReviewCo. We help companies show verified customer reviews on their site. Can we book a quick demo?"),
+("cold_outreach","Can we help with your lead generation?","sales@leadforge.example","We generate qualified leads for B2B companies. Our clients see 3x pipeline in 90 days. Let me know if you want to see case studies."),
+("cold_outreach","Partnership opportunity","bd@aitoolsco.example","Hi Sam, we would love to explore a partnership between our companies. We think there is strong synergy. Are you free for a call?"),
+("cold_outreach","We noticed something in your website","seo@rankhigh.example","Our audit found 14 issues on your site hurting your Google ranking. We can fix them for a flat fee. Want the free report?"),
+# jobs
+("job","Application: Field technician","amit.k@gmail-example.example","Dear Hiring Manager, I am applying for the field technician role. I have six years of experience in elevator maintenance. My resume is attached."),
+("job","Senior developer opportunity","recruiter@talentbridge.example","Hi Sam, I am recruiting for a senior developer role at a fast-growing fintech. Would you be open to a chat?"),
+("job","Resume - sales executive","priya.s@example.com","Please find attached my resume for the sales executive position advertised on your website."),
+# support / complaints
+("support","Cannot export reports since the update","mark@customer-co.example","Hi, since yesterday's update the PDF export fails with an error. This is blocking our month-end close. Please help."),
+("support","Login not working","jo@client.example","I cannot log in to my account since this morning. I tried resetting my password but the email never arrives."),
+("support","Question about door detector wiring","tech@serviceco.example","We installed the 3D detector but the LED stays red. Which terminal does the common wire go to?"),
+("claim","Very disappointed with delivery","angry@customer.example","This is the third time my order has arrived late and damaged. I expect a refund and an explanation."),
+("claim","Wrong item shipped","accounts@condocorp.example","You sent 10 of the wrong sensor. We ordered model B, not model A. Please arrange a replacement."),
+# internal / personal / calendar
+("internal","Re: Friday standup","sarah@examplecorp.example","Sounds good, moving it to 10:30. See everyone then."),
+("internal","Notes from today's call","alex@northfreight.example","Hi Sam, FYI here are the notes from today's call with the Orion team. Nothing needed from you."),
+("internal","Lunch?","friend@gmail-example.example","Are you free for lunch on Thursday? There is a new place near the office."),
+("internal","Updated project plan","pm@client-co.example","Attached is the updated project plan for the implementation. Please review milestone 3 and confirm the go-live date."),
+("calendar","Invitation: Weekly sync @ Thu 3pm","calendar-notification@google.example","You have been invited to Weekly sync. When: Thursday 3pm - 3:30pm. Join with Google Meet."),
+("calendar","Accepted: Product review","calendar@outlook-example.example","Priya accepted your invitation to Product review on Monday at 10am."),
+# alerts / bank / social / tender / auto-replies / surveys / legal / thanks
+("security","New sign-in to your account","security@accounts-example.example","We noticed a new sign-in from a Windows device in Mumbai. If this was you, no action is needed."),
+("security","Your verification code","no-reply@auth-example.example","Your verification code is 482913. It expires in 10 minutes. Do not share it."),
+("bank","Your September statement is ready","statements@bank-example.example","Your account statement for September is now available to view online."),
+("bank","Large transaction alert","alerts@bank-example.example","A transaction of $4,500.00 was made on your card ending 4242 at Office Depot."),
+("social","You appeared in 9 searches this week","notifications@linkedin-example.example","See who is looking at your profile. View all notifications."),
+("social","New comment on your post","no-reply@social-example.example","Mark Lee commented: great article, thanks for sharing."),
+("tender_alert","Weekly tender alerts: 42 new RFPs in your sector","alerts@tendersinfo.example","Here are this week's new tenders and RFPs matching your keywords. Subscribe to premium to see full details."),
+("tender_alert","New bids published today","notices@bidportal.example","12 new public tenders were published today in the categories you follow. Log in to view documents."),
+("auto_reply","Automatic reply: out of office","ravi@supplier.example","I am out of the office until 20 October with limited access to email. For urgent matters contact support@supplier.example."),
+("auto_reply","Undeliverable: your message","mailer-daemon@example.com","Your message could not be delivered to the following recipient: unknown@example.com. The address was not found."),
+("survey","How did we do?","feedback@cloudtools.example","Tell us about your recent support experience in this two-minute survey. Your feedback helps us improve."),
+("survey","Rate your delivery","surveys@gearhub.example","How was your delivery? Rate your experience and enter to win a $50 voucher."),
+("legal","Updates to our privacy policy","legal@softvendor.example","We have updated our terms of service and privacy policy, effective 1 November. No action is needed."),
+("legal","Notice of change to your agreement","contracts@deltacomp.example","Please find attached the amended supply agreement for your signature. Return the signed copy by 20 October."),
+("thanks","Thank you for visiting us","info@elevatorexpo.example","Thank you for visiting our booth. It was great to meet you. We will be in touch."),
+("thanks","Thanks!","mark@customer-co.example","Thanks for the quick fix, it is working now."),
+]
+
+# ---- real-style requests in many styles and industries (these must keep being caught)
+POS = [
+("quote_terse","Pls quote","alex@northfreight.example","Hi Sam,\n\nCan I please have a quote for this mod, spec on page 3\n\nKind Regards,"),
+("rfq_formal","RFQ-2026-205: Door operators","procurement@gulfbuild.example","Dear Supplier,\n\nPlease find attached our Request for Quotation RFQ-2026-205 for 40 door operators. Kindly submit your best price, delivery time and payment terms by 24 October 2026.\n\nRegards,\nProcurement"),
+("rfp","Request for Proposal: AP automation","tenders@cityhealth.example","The City Health Authority invites qualified vendors to respond to the attached RFP for an invoice automation solution. Proposals are due 5 November. Specifications are attached."),
+("price_request","Price for 3D detectors?","buyer@liftservice.example","Hello, what is your price for 25 of the 3D door detectors, and what is the lead time? We need them for a job starting next month."),
+("proposal","Proposal for hospital DMS","mgr@stmarys-hospital.example","We are looking for a document management system for our hospital in New York, around 500 users. Can you send your best proposal and pricing?"),
+("spec_pack","Specs attached - modernization","pm@alderbuild.example","Hi, attached is the technical specification for the 22 Elm St modernization. Could you review and send us a quotation by Friday?"),
+("quote_form","Quotation request","anita@kestrelfin.example","Hello, please quote for 40 user licences including implementation and one year of support. We need it by Friday."),
+("fwd_request","FW: RFQ - 214 Maple St","alex@northfreight.example","Hi Sam,\n\nCan I please have a quote for this mod, spec on page 3\n\nKind Regards,\n\nFrom: Jamie Lee <jlee@liftworks.example>\nSent: Monday, October 5, 2026 10:02 AM\nTo: Alex Moore\nSubject: RFQ - 214 Maple St\n\nHi Sam,\n\nPlease find specs attached. We will need a quote please."),
+("availability_price","Do you stock the GAL MOD?","tech@serviceco.example","Hi, do you stock the GAL MOD door operator and what would 5 units cost delivered to Hamilton?"),
+("demo_pricing","Pricing and a demo","priya@brightlogistics.example","We process about 5,000 invoices a month and want to automate capture. Could you send pricing and set up a demo next week?"),
+("bid","Invitation to bid: Data capture platform","sourcing@tata-supplier.example","You are invited to bid. Scope of work, specifications and BOQ are attached. Please submit your technical and commercial bid before the deadline."),
+("estimate","Estimate for parking gate repair","office@parkright.example","Our parking gate is stuck. Can you give us an estimate to repair or replace the motor? Photos attached."),
+("spanish","Solicitud de cotización","b.alvarez@minera.example","Estimados, adjuntamos las especificaciones. Favor enviar su cotización y propuesta técnica para el sistema de gestión documental."),
+("reseller","Reseller pricing request","ops@gulfsystems.example","We are a systems integrator and would like reseller pricing for your platform. Could you send your partner price list and terms?"),
+("rfi_price","Budgetary pricing needed","pm@arcadia-eng.example","We are preparing a budget for a 2027 project. Could you provide budgetary pricing for the access control package in the attached scope?"),
+]

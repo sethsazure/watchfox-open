@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "watchfox"
+version = "0.1.0"
+description = "WatchFox: watches mailboxes and calls your webhook when it finds what you asked for (open-weights decision model, zero email retention)."
+readme = "README.md"
+license = { text = "MIT" }
+keywords = ["email", "webhook", "classification", "laya", "self-hosted", "fastapi"]
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.27",
+  "httpx[socks]>=0.27",
+  "psycopg[binary]>=3.1",
+  "psycopg_pool>=3.2",
+  "questionary>=2.0",
+  "pypdf>=4.0",
+  "fpdf2>=2.7",
+  "msal>=1.28",
+  "google-auth>=2.29",
+  "google-auth-oauthlib>=1.2",
+  "google-api-python-client>=2.120",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+watchfox = "watchfox.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["watchfox*"]
+
+# The agent runs on a remote server, so the large machine-learning libraries are not needed here. Only the small email helpers
+# in the `laya` package are used: install it without its heavy dependencies:  pip install --no-deps "laya>=0.4.1"

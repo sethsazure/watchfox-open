@@ -1,0 +1,34 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: testpw
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm, cache-dependency-path: web/package-lock.json }
+      - name: Build the website (a test checks the bundle)
+        run: cd web && npm ci && npm run build
+      - name: Install
+        run: pip install -e ".[dev]" && pip install --no-deps "laya>=0.4.1"
+      - name: Tests on SQLite
+        run: pytest -q
+      - name: Tests on PostgreSQL
+        run: pytest -q
+        env:
+          WATCHFOX_TEST_PG: postgresql://postgres:testpw@localhost:5432

@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+.env
+*.db
+*.egg-info
+**/__pycache__
+web/node_modules
+web/dist
+tests
+examples
+run.command
+OPERATIONS.md

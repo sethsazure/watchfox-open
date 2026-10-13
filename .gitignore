@@ -1,0 +1,18 @@
+# secrets and local data: never committed
+.env
+.env.*
+!.env.example
+*.db
+*.db.old-*
+outbox/
+secret
+
+# build output and tools
+.venv/
+node_modules/
+web/dist/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.DS_Store
+.claude/

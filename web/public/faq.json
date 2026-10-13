@@ -1,0 +1,392 @@
+[
+ {
+  "id": "runs-what",
+  "group": "Runs and billing",
+  "where": [
+   "home",
+   "pricing",
+   "docs"
+  ],
+  "q": "What is a run?",
+  "a": "One email checked by one watch, whether or not it is caught. Emails that are ignored use runs too, because they were still checked. Your plan gives you a number of runs each month."
+ },
+ {
+  "id": "runs-two",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "I sent one email, so why did my count go up by 2?",
+  "a": "Each watch is a separate run. If two watches read the same mailbox, one email is checked twice and uses 2 runs. The Activity log shows this as \"2 watches (2 runs)\" and lists what each watch decided. To use one run per email, put the types in a single watch: a watch with several types still uses one run per email. Use separate watches only when each needs its own webhook address."
+ },
+ {
+  "id": "runs-test",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "Do test emails and test calls use runs?",
+  "a": "Yes. A sandbox email is checked like real mail, so every watch that checks it uses a run. A call to POST /v1/classify uses one run. Sending a sample event to your webhook with the Test webhook button does not use a run."
+ },
+ {
+  "id": "runs-out",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "What happens when my runs are used up?",
+  "a": "New mail stops being checked, but nothing is lost: emails in a connected mailbox are checked after you upgrade or when the month resets. Test calls and sandbox emails are refused until then. We warn you in the dashboard at 80% and at 100%."
+ },
+ {
+  "id": "runs-reset",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "When does my run count reset?",
+  "a": "On the 1st of every month at midnight UTC. Unused runs do not carry over to the next month."
+ },
+ {
+  "id": "runs-accounts",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "Can I get more free runs by making more accounts?",
+  "a": "No. A real mailbox gets one free allowance of 50 runs a month in total, however many free accounts connect it. New accounts are limited per network address, disposable email addresses and aliases such as name+1@gmail.com are not accepted, and free accounts share a daily cap on test calls. The paid plans are built for more volume."
+ },
+ {
+  "id": "billing-cancel",
+  "group": "Runs and billing",
+  "where": [
+   "home",
+   "pricing",
+   "docs"
+  ],
+  "q": "How do I cancel?",
+  "a": "The organization owner goes to Settings and chooses Cancel subscription. You keep your plan until the end of the period you already paid for, nothing more is charged, and then you move to the free Kit plan. Your mailboxes, watches and types stay."
+ },
+ {
+  "id": "billing-refund",
+  "group": "Runs and billing",
+  "where": [
+   "pricing"
+  ],
+  "q": "Do you give refunds?",
+  "a": "Fees are not refundable except where the law requires, as set out in the [Terms](/terms). If a payment went wrong, write to hello@watchfox.run and we will look at it."
+ },
+ {
+  "id": "billing-receipts",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "Where are my receipts?",
+  "a": "In Settings, under Payments and receipts (owner only). Each payment has a Download PDF button. The receipt is made when you ask for it, so WatchFox keeps no copy."
+ },
+ {
+  "id": "billing-card",
+  "group": "Runs and billing",
+  "where": [
+   "home",
+   "pricing"
+  ],
+  "q": "Do you store my card?",
+  "a": "No. You enter it in the secure form of our payment processor, Helcim. Card numbers never reach WatchFox. Prices are in US dollars."
+ },
+ {
+  "id": "billing-failed",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "What if a payment fails?",
+  "a": "Your plan stays active for a short grace period (7 days) while you update the card in Settings. After that you move back to the free Kit plan, and nothing is deleted."
+ },
+ {
+  "id": "billing-downgrade",
+  "group": "Runs and billing",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "What happens if I move to a smaller plan?",
+  "a": "Nothing is deleted. Your existing mailboxes, watches and types keep working. Only creating new ones is blocked until you are under the new plan's limits."
+ },
+ {
+  "id": "billing-annual",
+  "group": "Runs and billing",
+  "where": [
+   "pricing"
+  ],
+  "q": "How does yearly billing work?",
+  "a": "You pay once a year and get two months free (17% off). You can cancel at any time and keep the plan until the end of the year you paid for."
+ },
+ {
+  "id": "catch-new",
+  "group": "Catching and accuracy",
+  "where": [
+   "docs"
+  ],
+  "q": "Why was an older email not checked?",
+  "a": "A watch only looks at mail that arrives after the watch is created. To include recent mail, set backfill_days (0 to 7) when you create the watch."
+ },
+ {
+  "id": "catch-miss",
+  "group": "Catching and accuracy",
+  "where": [
+   "docs"
+  ],
+  "q": "An email was missed, or caught by mistake. What do I do?",
+  "a": "Open it in the Activity log: it shows the score and, for skipped mail, the reason. Paste the same text into Test a message to compare. Then press Wrong catch or Should have been caught, and choose Tune again on the Types page. The more real examples you give, especially look-alikes it should ignore, the better it gets."
+ },
+ {
+  "id": "catch-several",
+  "group": "Catching and accuracy",
+  "where": [
+   "docs"
+  ],
+  "q": "Why was one email caught as two types?",
+  "a": "Each type is judged on its own, so one email can match several, for example both Enquiries and Purchase orders. Choosing several types in one watch never changes the result for any of them."
+ },
+ {
+  "id": "catch-confidence",
+  "group": "Catching and accuracy",
+  "where": [
+   "docs"
+  ],
+  "q": "What does the percentage on a catch mean?",
+  "a": "How clearly the email fits the type, compared with the line for a match: 85% and over is high, 65 to 84% is medium, below 65% is borderline. It is a guide to how clear a catch is, not the chance that it is right."
+ },
+ {
+  "id": "catch-speed",
+  "group": "Catching and accuracy",
+  "where": [
+   "home",
+   "docs"
+  ],
+  "q": "How fast will I find out about a catch?",
+  "a": "Microsoft 365 mailboxes deliver new mail within seconds. Gmail and IMAP mailboxes are checked about once a minute, so a catch reaches your webhook within a minute or two. Sandbox mailboxes are checked every couple of seconds."
+ },
+ {
+  "id": "catch-ai",
+  "group": "Catching and accuracy",
+  "where": [
+   "home",
+   "docs"
+  ],
+  "q": "Does WatchFox use AI?",
+  "a": "A checking agent decides each email. An optional AI assistant helps you set up your own types by drafting a name, a description and example emails. The assistant only sees what you type into the setup form, never real email, and it is never used when your mail is checked."
+ },
+ {
+  "id": "catch-types",
+  "group": "Catching and accuracy",
+  "where": [
+   "docs"
+  ],
+  "q": "Can I catch things other than the six built-in types?",
+  "a": "Yes. On the Types page, describe what you want, give some examples, and WatchFox tunes a type for you. Use it in a watch like any other. How many custom types you can have depends on your plan."
+ },
+ {
+  "id": "catch-accuracy",
+  "group": "Catching and accuracy",
+  "where": [
+   "docs"
+  ],
+  "q": "How accurate is it?",
+  "a": "It depends on the type and on your mail, so check it on your own emails before relying on it. See [Accuracy](#/docs/accuracy) for how the built-in types were tuned."
+ },
+ {
+  "id": "conn-readonly",
+  "group": "Connecting mailboxes",
+  "where": [
+   "home",
+   "docs"
+  ],
+  "q": "Can WatchFox send, move or delete my mail?",
+  "a": "No. Mailboxes are connected read-only. WatchFox reads new mail to check it and never sends, moves, marks or deletes anything. You can disconnect at any time."
+ },
+ {
+  "id": "conn-gmail",
+  "group": "Connecting mailboxes",
+  "where": [
+   "docs"
+  ],
+  "q": "Why does Gmail need an app password?",
+  "a": "Google does not let outside services use your normal password. An app password is a separate 16-letter password that only works for this connection and that you can remove any time. Google offers them only on accounts that use 2-Step Verification."
+ },
+ {
+  "id": "conn-admin",
+  "group": "Connecting mailboxes",
+  "where": [
+   "docs"
+  ],
+  "q": "Microsoft says I need admin approval. What does that mean?",
+  "a": "Your organization has set Microsoft 365 so that an administrator must approve new apps. Ask your IT team to approve WatchFox once (the connect page explains how), or connect a different mailbox."
+ },
+ {
+  "id": "conn-attention",
+  "group": "Connecting mailboxes",
+  "where": [
+   "docs"
+  ],
+  "q": "A mailbox says it needs attention.",
+  "a": "The sign-in expired or was revoked, so WatchFox cannot read it. Press Reconnect and sign in again; the watches carry on. Over the API, send the person a new connect link with the connection_id."
+ },
+ {
+  "id": "conn-sandbox",
+  "group": "Connecting mailboxes",
+  "where": [
+   "docs"
+  ],
+  "q": "What is a sandbox?",
+  "a": "A pretend mailbox for trying everything without connecting real email. You add test emails yourself and your watches check them within a couple of seconds. It counts towards your mailbox limit and its emails use runs."
+ },
+ {
+  "id": "conn-limits",
+  "group": "Connecting mailboxes",
+  "where": [
+   "pricing",
+   "docs"
+  ],
+  "q": "How many mailboxes and watches can I have?",
+  "a": "Kit: 2 mailboxes, 3 watches, 3 custom types, 3 team members. Tracker: 10, 25, 15, 10. Alpha: 50, 100, 50, 50."
+ },
+ {
+  "id": "conn-disconnect",
+  "group": "Connecting mailboxes",
+  "where": [
+   "docs"
+  ],
+  "q": "What happens when I disconnect a mailbox?",
+  "a": "Its stored sign-in, its watches and the records they produced are deleted. Nothing in the mailbox itself is changed."
+ },
+ {
+  "id": "api-hook",
+  "group": "Webhooks and the API",
+  "where": [
+   "docs"
+  ],
+  "q": "My webhook is not arriving.",
+  "a": "Check the Activity log: the Webhook column says delivered, retrying or failed, with the HTTP status. Then press Test webhook on the watch to send a sample event. Your endpoint must be a public https address and answer with a 2xx within 10 seconds. A failed delivery is retried up to 4 times. Verify the signature over the raw request body, not re-serialised JSON."
+ },
+ {
+  "id": "api-key",
+  "group": "Webhooks and the API",
+  "where": [
+   "docs"
+  ],
+  "q": "I lost my API key.",
+  "a": "A key is shown only once and we store only a hash, so it cannot be recovered. Create a new one under API keys, update your code, and revoke the old one."
+ },
+ {
+  "id": "api-limits",
+  "group": "Webhooks and the API",
+  "where": [
+   "docs"
+  ],
+  "q": "Are the limits the same in the API and the dashboard?",
+  "a": "Yes. Every limit is checked on the server. Going over a count limit returns a 400 that names the limit; going over a rate limit or the monthly runs returns a 429."
+ },
+ {
+  "id": "api-email",
+  "group": "Webhooks and the API",
+  "where": [
+   "docs"
+  ],
+  "q": "Can I get the whole email and its attachments?",
+  "a": "Yes, either inside the webhook (set include on the watch) or by download from the links in the event. WatchFox keeps no copy, so the email has to still be in the mailbox when you ask. Download what you need when the webhook arrives."
+ },
+ {
+  "id": "api-agent",
+  "group": "Webhooks and the API",
+  "where": [
+   "docs"
+  ],
+  "q": "Can my AI coding agent build the integration for me?",
+  "a": "Yes. Give it [/llms-full.txt](/llms-full.txt), a single plain-text guide with everything it needs, or the [OpenAPI file](/v1/openapi.json). See [Build with an AI agent](#/docs/agents)."
+ },
+ {
+  "id": "api-duplicate",
+  "group": "Webhooks and the API",
+  "where": [
+   "docs"
+  ],
+  "q": "Why do I get \"You already have this exact watch\"?",
+  "a": "A watch with the same mailbox, the same types and the same webhook already exists. Edit that one, or change the types or the webhook to make another."
+ },
+ {
+  "id": "priv-keep",
+  "group": "Privacy and your data",
+  "where": [
+   "home",
+   "pricing",
+   "docs"
+  ],
+  "q": "Do you keep my emails?",
+  "a": "No. For the Activity log WatchFox keeps the subject, the sender, a 300-character snippet, attachment names and the scores, for 90 days. It never keeps the full text, the .eml file or attachment contents; they are read from your mailbox only when you ask for them."
+ },
+ {
+  "id": "priv-who",
+  "group": "Privacy and your data",
+  "where": [
+   "home",
+   "docs"
+  ],
+  "q": "Who sees the text of my emails?",
+  "a": "To decide whether an email matches, the beginning of its subject and text goes over an encrypted private network to our own checking service, which does not keep it. If that service is unavailable, the same text may go to a backup checking service run by a cloud provider acting for us, only for that decision. See the [Privacy policy](/privacy)."
+ },
+ {
+  "id": "priv-where",
+  "group": "Privacy and your data",
+  "where": [
+   "docs"
+  ],
+  "q": "Where is my data stored?",
+  "a": "On Microsoft Azure in Canada, in an encrypted PostgreSQL database. Mailbox passwords and sign-in tokens are stored encrypted."
+ },
+ {
+  "id": "priv-delete",
+  "group": "Privacy and your data",
+  "where": [
+   "docs"
+  ],
+  "q": "How do I delete my data?",
+  "a": "Disconnect a mailbox to delete its stored sign-in, its watches and their records. Delete a watch to delete the records it produced. To close your account entirely, write to hello@watchfox.run. Logs older than 90 days are removed automatically."
+ },
+ {
+  "id": "team-signin",
+  "group": "Account and team",
+  "where": [
+   "home",
+   "docs"
+  ],
+  "q": "Why is there no password?",
+  "a": "You sign in with GitHub, Google or Microsoft, so there is no password to remember, reuse or leak. The first sign-in creates your account on the free Kit plan."
+ },
+ {
+  "id": "team-org",
+  "group": "Account and team",
+  "where": [
+   "docs"
+  ],
+  "q": "Can I belong to more than one organization?",
+  "a": "No, an account belongs to one organization, and everything in it (mailboxes, watches, types, keys, logs and plan) is shared by its members. To join a different organization, sign in with a different GitHub, Google or Microsoft account."
+ },
+ {
+  "id": "team-roles",
+  "group": "Account and team",
+  "where": [
+   "docs"
+  ],
+  "q": "What can team members do?",
+  "a": "Invited people are developers and can use every feature. Only the owner can invite or remove people, rename the organization, change the plan and see payments. API keys cannot do any of these."
+ }
+]
